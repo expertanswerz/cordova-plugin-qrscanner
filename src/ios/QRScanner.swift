@@ -179,8 +179,8 @@ class QRScanner : CDVPlugin, AVCaptureMetadataOutputObjectsDelegate {
         }
         do {
             // torch is only available for back camera
-            //if(backCamera == nil || backCamera!.hasTorch == false || backCamera!.isTorchAvailable == false || backCamera!.isTorchModeSupported(useMode) == false){
-            if(backCamera == nil || backCamera!.hasTorch == false){
+            if(backCamera == nil || backCamera!.hasTorch == false || backCamera!.isTorchAvailable == false || backCamera!.isTorchModeSupported(useMode) == false){
+            //if(backCamera == nil || backCamera!.hasTorch == false){
                 throw LightError.torchUnavailable
             }
             try backCamera!.lockForConfiguration()
@@ -409,8 +409,8 @@ class QRScanner : CDVPlugin, AVCaptureMetadataOutputObjectsDelegate {
         }
 
         var canEnableLight = false
-        //if(backCamera?.hasTorch == true && backCamera?.isTorchAvailable == true && backCamera?.isTorchModeSupported(AVCaptureTorchMode.on) == true){
-        if(backCamera?.hasTorch == true){
+        if(backCamera?.hasTorch == true && backCamera?.isTorchAvailable == true && backCamera?.isTorchModeSupported(AVCaptureTorchMode.on) == true){
+        //if(backCamera?.hasTorch == true){
             canEnableLight = true
         }
 

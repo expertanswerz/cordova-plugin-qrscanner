@@ -228,8 +228,8 @@ class QRScanner : CDVPlugin, AVCaptureMetadataOutputObjectsDelegate {
 				try backCamera!.lockForConfiguration()
 				backCamera!.torchMode = AVCaptureTorchMode.off
 				backCamera!.unlockForConfiguration()
-			} catch LightError.torchUnavailable {
-				self.sendErrorCode(command: command, error: QRScannerError.LIGHT_UNAVAILABLE)
+			//} catch LightError.torchUnavailable {
+			//	self.sendErrorCode(command: command, error: QRScannerError.LIGHT_UNAVAILABLE)
 			} catch let error as NSError {
 				print(error.localizedDescription)
 			}
@@ -435,7 +435,7 @@ class QRScanner : CDVPlugin, AVCaptureMetadataOutputObjectsDelegate {
             showing = true
         }
 
-        var lightEnabled = false
+        var lightEnabled2 = false
         //if(backCamera?.torchMode == AVCaptureTorchMode.on){
         //    lightEnabled = true
         //}
@@ -464,7 +464,7 @@ class QRScanner : CDVPlugin, AVCaptureMetadataOutputObjectsDelegate {
             "scanning": boolToNumberString(bool: scanning),
             "previewing": boolToNumberString(bool: previewing),
             "showing": boolToNumberString(bool: showing),
-            "lightEnabled": boolToNumberString(bool: lightEnabled),
+            "lightEnabled": boolToNumberString(bool: lightEnabled2),
             "canOpenSettings": boolToNumberString(bool: canOpenSettings),
             "canEnableLight": boolToNumberString(bool: canEnableLight),
             "canChangeCamera": boolToNumberString(bool: canChangeCamera),

@@ -468,8 +468,8 @@ class QRScanner : CDVPlugin, AVCaptureMetadataOutputObjectsDelegate {
             "canEnableLight": boolToNumberString(bool: canEnableLight),
             "canChangeCamera": boolToNumberString(bool: canChangeCamera),
             "currentCamera": String(currentCamera),
-			"hasTorch": boolToNumberString(bool: backCamera?.hasTorch),
-			"isTorchAvailable": boolToNumberString(bool: backCamera?.isTorchAvailable),
+			"hasTorch": boolToNumberString(bool: (backCamera?.hasTorch == true)),
+			"isTorchAvailable": boolToNumberString(bool: (backCamera?.isTorchAvailable == true)),
 			"isTorchModeOnSupported": boolToNumberString(bool: (backCamera?.isTorchModeSupported(AVCaptureTorchMode.on) == true))
         ]
 

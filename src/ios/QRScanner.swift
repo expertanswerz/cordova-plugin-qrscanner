@@ -17,6 +17,7 @@ class QRScanner : CDVPlugin, AVCaptureMetadataOutputObjectsDelegate {
     var scanning: Bool = false
     var scanned: Bool = false
     var nextScanningCommand: CDVInvokedUrlCommand?
+    var lightEnabled: Bool = false
 
     enum QRScannerError: Int32 {
         case UNEXPECTED_ERROR = 0,
@@ -221,6 +222,12 @@ class QRScanner : CDVPlugin, AVCaptureMetadataOutputObjectsDelegate {
                 nextScanningCommand = nil
             }
         }
+		
+		if (lightEnabled == true) {
+			backCamera!.lockForConfiguration()
+			backCamera!.torchMode = AVCaptureTorchMode.off
+			backCamera!.unlockForConfiguration()
+		}
     }
 
     func pageDidLoad() {
@@ -254,6 +261,11 @@ class QRScanner : CDVPlugin, AVCaptureMetadataOutputObjectsDelegate {
             nextScanningCommand = command
             scanned = false
             scanning = true
+			if (lightEnabled == true) {
+				backCamera!.lockForConfiguration()
+				backCamera!.torchMode = AVCaptureTorchMode.on
+				backCamera!.unlockForConfiguration()
+			}
         }
     }
 
@@ -264,6 +276,11 @@ class QRScanner : CDVPlugin, AVCaptureMetadataOutputObjectsDelegate {
             if(nextScanningCommand != nil){
                 self.sendErrorCode(command: nextScanningCommand!, error: QRScannerError.SCAN_CANCELED)
             }
+			if (lightEnabled == true) {
+				backCamera!.lockForConfiguration()
+				backCamera!.torchMode = AVCaptureTorchMode.off
+				backCamera!.unlockForConfiguration()
+			}
             self.getStatus(command)
         }
     }
@@ -333,15 +350,17 @@ class QRScanner : CDVPlugin, AVCaptureMetadataOutputObjectsDelegate {
     }
 
     func enableLight(_ command: CDVInvokedUrlCommand) {
-        if(self.prepScanner(command: command)){
-            self.configureLight(command: command, state: true)
-        }
+		lightEnabled = true
+        //if(self.prepScanner(command: command)){
+        //    self.configureLight(command: command, state: true)
+        //}
     }
 
     func disableLight(_ command: CDVInvokedUrlCommand) {
-        if(self.prepScanner(command: command)){
-            self.configureLight(command: command, state: false)
-        }
+		lightEnabled = false
+        //if(self.prepScanner(command: command)){
+        //    self.configureLight(command: command, state: false)
+        //}
     }
 
     func destroy(_ command: CDVInvokedUrlCommand) {

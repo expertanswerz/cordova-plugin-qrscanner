@@ -25,7 +25,10 @@ function convertStatus(statusDictionary) {
     canOpenSettings: stringToBool(statusDictionary.canOpenSettings),
     canEnableLight: stringToBool(statusDictionary.canEnableLight),
     canChangeCamera: stringToBool(statusDictionary.canChangeCamera),
-    currentCamera: parseInt(statusDictionary.currentCamera)
+    currentCamera: parseInt(statusDictionary.currentCamera),
+    hasTorch: stringToBool(statusDictionary.hasTorch),
+    isTorchAvailable: stringToBool(statusDictionary.isTorchAvailable),
+    isTorchModeOnSupported: stringToBool(statusDictionary.isTorchModeOnSupported)
   };
 }
 

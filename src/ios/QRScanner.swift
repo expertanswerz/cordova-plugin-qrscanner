@@ -224,7 +224,7 @@ class QRScanner : CDVPlugin, AVCaptureMetadataOutputObjectsDelegate {
         }
 		
 		if (lightEnabled == true) {
-			backCamera!.lockForConfiguration()
+			try backCamera!.lockForConfiguration()
 			backCamera!.torchMode = AVCaptureTorchMode.off
 			backCamera!.unlockForConfiguration()
 		}
@@ -262,7 +262,7 @@ class QRScanner : CDVPlugin, AVCaptureMetadataOutputObjectsDelegate {
             scanned = false
             scanning = true
 			if (lightEnabled == true) {
-				backCamera!.lockForConfiguration()
+				try backCamera!.lockForConfiguration()
 				backCamera!.torchMode = AVCaptureTorchMode.on
 				backCamera!.unlockForConfiguration()
 			}
@@ -277,7 +277,7 @@ class QRScanner : CDVPlugin, AVCaptureMetadataOutputObjectsDelegate {
                 self.sendErrorCode(command: nextScanningCommand!, error: QRScannerError.SCAN_CANCELED)
             }
 			if (lightEnabled == true) {
-				backCamera!.lockForConfiguration()
+				try backCamera!.lockForConfiguration()
 				backCamera!.torchMode = AVCaptureTorchMode.off
 				backCamera!.unlockForConfiguration()
 			}

@@ -435,7 +435,7 @@ class QRScanner : CDVPlugin, AVCaptureMetadataOutputObjectsDelegate {
             showing = true
         }
 
-        var lightEnabled2 = false
+        //var lightEnabled = false
         //if(backCamera?.torchMode == AVCaptureTorchMode.on){
         //    lightEnabled = true
         //}
@@ -447,7 +447,6 @@ class QRScanner : CDVPlugin, AVCaptureMetadataOutputObjectsDelegate {
 
         var canEnableLight = false
         if(backCamera?.hasTorch == true && backCamera?.isTorchAvailable == true && backCamera?.isTorchModeSupported(AVCaptureTorchMode.on) == true){
-        //if(backCamera?.hasTorch == true){
             canEnableLight = true
         }
 
@@ -464,11 +463,14 @@ class QRScanner : CDVPlugin, AVCaptureMetadataOutputObjectsDelegate {
             "scanning": boolToNumberString(bool: scanning),
             "previewing": boolToNumberString(bool: previewing),
             "showing": boolToNumberString(bool: showing),
-            "lightEnabled": boolToNumberString(bool: lightEnabled2),
+            "lightEnabled": boolToNumberString(bool: lightEnabled),
             "canOpenSettings": boolToNumberString(bool: canOpenSettings),
             "canEnableLight": boolToNumberString(bool: canEnableLight),
             "canChangeCamera": boolToNumberString(bool: canChangeCamera),
-            "currentCamera": String(currentCamera)
+            "currentCamera": String(currentCamera),
+			"hasTorch": boolToNumberString(bool: backCamera?.hasTorch),
+			"isTorchAvailable": boolToNumberString(bool: backCamera?.isTorchAvailable),
+			"isTorchModeOnSupported": boolToNumberString(bool: (backCamera?.isTorchModeSupported(AVCaptureTorchMode.on) == true))
         ]
 
         let pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: status)
